@@ -18,7 +18,7 @@ const Cart = () => {
                   <h5>{product.title}</h5>
                   <h5>{product.price}</h5>
 
-                  <button className='btn'> Remove</button>
+                  <button  className='btn'> Remove</button>
                 </div>
                )
                )
