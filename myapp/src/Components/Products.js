@@ -28,6 +28,8 @@ useEffect(()=> async ()=>{
             <h4>{product.title}</h4>
             <h5>{product.price}</h5>
 
+            <button className='btn'> Add To Cart</button>
+
 
         </div>
     ))
