@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { add } from '../Stores/cartSlice';
 
 const Products = () => {
+
+    const dispatch = useDispatch();
 
 const[products , Setproducts] = useState([]);
 
@@ -18,6 +22,10 @@ useEffect(()=> async ()=>{
 } , []);
 
 
+const handleAdd =(product)=>{
+dispatch(add(product));
+}
+
   return  <div className='productsWrapper'>
 {
 
@@ -28,7 +36,7 @@ useEffect(()=> async ()=>{
             <h4>{product.title}</h4>
             <h5>{product.price}</h5>
 
-            <button className='btn'> Add To Cart</button>
+            <button onClick={()=> handleAdd(product)}    className='btn' > Add To Cart</button>
 
 
         </div>

@@ -1,11 +1,31 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
-const cart = () => {
+const Cart = () => {
+
+  const products = useSelector((state) => state.cart)
+
   return (
     <div>
-       Cart
+      <h3>Cart</h3>
+      <div className='cartWrapper'>
+        {
+               products.map(product=>(
+
+
+                <div className='cartcard'>
+                  <img src={product.image} alt="Loading..." />
+                  <h5>{product.title}</h5>
+                  <h5>{product.price}</h5>
+
+                  <button className='btn'> Remove</button>
+                </div>
+               )
+               )
+        }
+      </div>
     </div>
   )
 }
 
-export default cart
+export default Cart
