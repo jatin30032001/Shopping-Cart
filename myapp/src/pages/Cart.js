@@ -19,7 +19,7 @@ const Cart = () => {
                products.map((product)=>(
 
 
-                <div className='cartcard'>
+                <div  className='cartcard'>
                   <img src={product.image} alt="Loading..." />
                   <h5>{product.title}</h5>
                   <h5>{product.price}</h5>

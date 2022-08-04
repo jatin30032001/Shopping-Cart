@@ -58,4 +58,4 @@ export const fetchProducts = createAsyncThunk('products/fetch', async () => {
 //             dispatch(setStatus(STATUSES.ERROR));
 //         }
 //     };
-// }
+// }                                                                            
