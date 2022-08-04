@@ -1,7 +1,7 @@
 
 const {createSlice} = require ("@reduxjs/toolkit");
 
-const STATUSES =  object.freeze({
+const STATUSES =  Object.freeze({
     IDLE:' idle' , 
     ERROR :  ' error',
     LOADING : 'Loading',
@@ -12,7 +12,7 @@ const productSlice = createSlice({
     name :'product',
     initialState: {
          data :[],
-         statuus :STATUSES.IDLE,
+         status :STATUSES.IDLE,
          
     },
 
@@ -21,12 +21,16 @@ const productSlice = createSlice({
 
             state.data =  action.payload;
         },
+
+        setStatus(state , action){
+               state.status = action.payload;                                                                                                                            
+        }
        
     }
 });
 
 
-export const {setProducts} = productSlice.actions;
+export const {setProducts , setStatus} = productSlice.actions;
 export default productSlice.reducer;
 
 
@@ -41,9 +45,11 @@ export function fetchProducts() {
             const res =  await fetch('https://fakestoreapi.com/products');
             const data = await res.json();
             dispatch(setProducts(data))
+            dispatch(setStatus(STATUSES.IDLE))
         }
         catch(err){
-
+           console.log(err);
+           dispatch(setStatus(STATUSES.ERROR))
         }
     }
 }
