@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { add } from '../Stores/cartSlice';
 import { fetchProducts } from '../Stores/productSlice';
@@ -18,7 +18,7 @@ const Products = () => {
         //     setProducts(data);
         // };
         // fetchProducts();
-    }, []);
+    },[]);
 
     const handleAdd = (product) => {
         dispatch(add(product));
