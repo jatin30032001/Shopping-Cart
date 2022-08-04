@@ -1,52 +1,50 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { add } from '../Stores/cartSlice';
+import { fetchProducts } from '../Stores/productSlice';
+import { STATUSES } from '../Stores/productSlice';
 
 const Products = () => {
-
     const dispatch = useDispatch();
+    const { data: products, status } = useSelector((state) => state.product);
+    // const [products, setProducts] = useState([]);
 
-const[products , Setproducts] = useState([]);
+    useEffect(() => {
+        dispatch(fetchProducts());
+        // const fetchProducts = async () => {
+        //     const res = await fetch('https://fakestoreapi.com/products');
+        //     const data = await res.json();
+        //     console.log(data);
+        //     setProducts(data);
+        // };
+        // fetchProducts();
+    }, []);
 
-useEffect(()=> async ()=>{
+    const handleAdd = (product) => {
+        dispatch(add(product));
+    };
 
-    const fetchProducts = async ()=>{
-          const res = await fetch ('https://fakestoreapi.com/products')
-          const data = await res.json();
-
-          console.log(data)
-          Setproducts(data);
+    if (status === STATUSES.LOADING) {
+        return <h2>Loading....</h2>;
     }
 
-       fetchProducts();
-} , []);
-
-
-const handleAdd =(product)=>{
-dispatch(add(product));
-}
-
-  return  <div className='productsWrapper'>
-{
-
-    products.map(product =>(
-        <div className='card' key={product.id}>
-
-            <img src={product.image} alt="Loading..." />
-            <h4>{product.title}</h4>
-            <h5>{product.price}</h5>
-
-            <button onClick={()=> handleAdd(product)}    className='btn' > Add To Cart</button>
-
-
+    if (status === STATUSES.ERROR) {
+        return <h2>Something went wrong!</h2>;
+    }
+    return (
+        <div className="productsWrapper">
+            {products.map((product) => (
+                <div className="card" key={product.id}>
+                    <img src={product.image} alt="" />
+                    <h4>{product.title}</h4>
+                    <h5>{product.price}</h5>
+                    <button onClick={() => handleAdd(product)} className="btn">
+                        Add to cart
+                    </button>
+                </div>
+            ))}
         </div>
-    ))
-}
+    );
+};
 
-
-  </div>
-    
-  
-}
-
-export default Products
+export default Products;
