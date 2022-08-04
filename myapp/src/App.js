@@ -1,6 +1,5 @@
 
 import './App.css';
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
@@ -9,8 +8,7 @@ import {Provider} from "react-redux"
 
 import store from './Stores/store'
 
-
-
+//App.js
 
 function App() {
   return (
